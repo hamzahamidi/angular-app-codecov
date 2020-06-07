@@ -6,8 +6,7 @@ addons:
 env:
   global:
     CODECOV_TOKEN=$CODECOV_TOKEN    
-before_script:
-  - yarn install 
+
 jobs:
   include:
     - stage: Test coverage
@@ -15,3 +14,7 @@ jobs:
         - ng test --browsers=ChromeHeadlessNoSandbox --codeCoverage=true --watch=false
       after_script: 
         - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./node_modules/.bin/codecov; fi     
+
+branches:
+  only:
+    - master
